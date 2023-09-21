@@ -211,14 +211,17 @@ def createToolOptions(settings, additionalOptions = [:]){
 }
 
 def prepare(parameters){
+    println "BEFORE PREPARE: ${parameters}"
     // ensure tool maps are initialized correctly
     for(String tool : TOOLS){
         parameters[tool] = toMap(parameters[tool])
     }
+    println "AFTER PREPARE: ${parameters}"
     return parameters
 }
 
 def toMap(parameter){
+    println "BEFORE TOMAP: ${parameter}"
     if(MapUtils.isMap(parameter))
         parameter.put('active', parameter.active == null?true:parameter.active)
     else if(Boolean.TRUE.equals(parameter))
@@ -227,5 +230,6 @@ def toMap(parameter){
         parameter = [active: false]
     else
         parameter = [:]
+    println "AFTER TOMAP: ${parameter}"
     return parameter
 }
